@@ -7,9 +7,16 @@ summary.rdd_data <- function(object, ...) {
     cutpoint <- getCutpoint(object)
     hasCovar_eng <- ifelse(hasCovar(object), "yes", "no")
     cat("### rdd_data object ###\n")
-    cat("\nCutpoint:", cutpoint, "\n")
-    cat("Sample size:", "\n\t-Full :", nrow(object), "\n\t-Left :", sum(object$x < cutpoint), "\n\t-Right:", sum(object$x >= 
-        cutpoint))
+    cat("\nCutpoint:", cutpoint)
+    cat("\nType:", getType(object), "\n")
+    if(isFuzzy(object)) {
+      n_treat <- sum(object$z)
+      untr <- paste(", untreated:", nrow(object)-n_treat)
+      tr <- paste(", treated:", n_treat)
+    }
+    cat("Sample size:", "\n\t-Full :", nrow(object), 
+        "\n\t-Left :", sum(object$x < cutpoint), if(isFuzzy(object)) untr else NULL,
+        "\n\t-Right:", sum(object$x >= cutpoint), if(isFuzzy(object)) tr else NULL)
     cat("\nCovariates:", hasCovar_eng, "\n")
 }
 
@@ -51,7 +58,7 @@ summary.rdd_data <- function(object, ...) {
 
 
 ### PLOT method
-plot.rdd_data <- function(x, h, nbins = NULL, xlim = range(object$x, na.rm = TRUE), cex = 0.7, nplot = 1, device = c("base", 
+plot.rdd_data <- function(x, h=NULL, nbins = NULL, xlim = range(object$x, na.rm = TRUE), cex = 0.7, nplot = 1, device = c("base", 
     "ggplot"), ...) {
     
     object <- x
@@ -59,7 +66,7 @@ plot.rdd_data <- function(x, h, nbins = NULL, xlim = range(object$x, na.rm = TRU
     device <- match.arg(device)
     
     ## bandwidth: use Ruppert, Sheather and Wand (KernSmooth:::dpill)
-    if (missing(h) & is.null(nbins)) {
+    if (is.null(h) & is.null(nbins)) {
         if (!all(xlim == range(object$x, na.rm = TRUE))) {
             object <- subset(object, x > min(xlim) & x < max(xlim))
         }
@@ -69,17 +76,15 @@ plot.rdd_data <- function(x, h, nbins = NULL, xlim = range(object$x, na.rm = TRU
         } else {
             se <- seq(from = 1 - floor(nplot/2) * 0.2, to = 1 + floor(nplot/2) * 0.2, by = 0.2)
         }
-        hs <- if (nplot == 1) 
-            h else se * h
-    } else if (!missing(h) & is.null(nbins)) {
+        hs <- ifelse(nplot == 1, h,  se * h)
+    } else if (!is.null(h) & is.null(nbins)) {
         if (length(h) == 1) {
             if (is_even(nplot)) {
                 se <- seq(from = 1 - (sum(1:nplot < (nplot/2))) * 0.2, to = 1 + (sum(1:nplot > (nplot/2))) * 0.2, by = 0.2)
             } else {
                 se <- seq(from = 1 - floor(nplot/2) * 0.2, to = 1 + floor(nplot/2) * 0.2, by = 0.2)
             }
-            hs <- if (nplot == 1) 
-                h else se * h
+            hs <- ifelse(nplot == 1, h,  se * h)
         } else {
             if (length(h == nplot)) {
                 hs <- h
@@ -88,7 +93,7 @@ plot.rdd_data <- function(x, h, nbins = NULL, xlim = range(object$x, na.rm = TRU
             }
         }
     } else if (!is.null(nbins)) {
-        hs <- rep(0.05, nplot)
+        hs <- NULL
         if (length(nbins) != nplot) {
             stop("Length of nbins should be equal to nplot (", nplot, ")")
         }

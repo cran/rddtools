@@ -7,7 +7,6 @@
 #' @param paired Argument of the \code{\link{t.test}} function: logical indicating whether you want paired t-tests.
 #' @param var.equal Argument of the \code{\link{t.test}} function:  logical variable indicating whether to treat the two variances as being equal
 #' @param p.adjust Whether to adjust the p-values for multiple testing. Uses the \code{\link{p.adjust}} function
-#' @param \ldots currently not used
 #' @return A data frame with, for each covariate, the mean on each size, the difference, t-stat and ts p-value. 
 #' @author Matthieu Stigler <\email{Matthieu.Stigler@@gmail.com}>
 #' @seealso \code{\link{covarTest_dis}} for the Kolmogorov-Smirnov test of equality of distribution
@@ -49,8 +48,9 @@ covarTest_mean.rdd_data <- function(object, bw = NULL, paired = FALSE, var.equal
     covar <- getCovar(object)
     cutvar <- object$x
     
-    covarTest_mean_low(covar = covar, cutvar = cutvar, cutpoint = cutpoint, bw = bw, paired = paired, var.equal = var.equal, 
-        p.adjust = p.adjust)
+    covarTest_mean_low(covar = covar, cutvar = cutvar, cutpoint = cutpoint, 
+                       bw = bw, paired = paired, var.equal = var.equal, 
+                       p.adjust = p.adjust)
     
 }
 
@@ -87,14 +87,15 @@ covarTest_mean_low <- function(covar, cutvar, cutpoint, bw = NULL, paired = FALS
     regime <- cutvar < cutpoint
     
     ## Split data
-    covar_num <- sapply(covar, as.numeric)
+    covar_num <- sapply(covar, make_numeric)
     
     tests <- apply(covar_num, 2, function(x) t.test(x[regime], x[!regime], paired = paired, var.equal = var.equal))
     tests_vals <- sapply(tests, function(x) c(x[["estimate"]], diff(x[["estimate"]]), x[c("statistic", "p.value")]))
     
     ## Adjust p values if required:
-    if (p.adjust != "none") 
+    if (p.adjust != "none") {
         tests_vals["p.value", ] <- p.adjust(tests_vals["p.value", ], method = p.adjust)
+    }
     
     ## Print results
     res <- t(tests_vals)
@@ -115,7 +116,6 @@ covarTest_mean_low <- function(covar, cutvar, cutpoint, bw = NULL, paired = FALS
 #' @param bw a bandwidth
 #' @param exact Argument of the \code{\link{ks.test}} function: NULL or a logical indicating whether an exact p-value should be computed.
 #' @param p.adjust Whether to adjust the p-values for multiple testing. Uses the \code{\link{p.adjust}} function
-#' @param \ldots currently not used
 #' @return A data frame  with, for each covariate, the K-S statistic and its p-value. 
 #' @author Matthieu Stigler <\email{Matthieu.Stigler@@gmail.com}>
 #' @seealso \code{\link{covarTest_mean}} for the t-test of equality of means
@@ -140,25 +140,27 @@ covarTest_mean_low <- function(covar, cutvar, cutpoint, bw = NULL, paired = FALS
 #' covarTest_dis(reg_nonpara)
 
 #' @export
-covarTest_dis <- function(object, bw, exact = NULL, p.adjust = c("none", "holm", "BH", "BY", "hochberg", "hommel", "bonferroni")) UseMethod("covarTest_dis")
+covarTest_dis <- function(object, bw, exact = NULL,
+                          p.adjust = c("none", "holm", "BH", "BY", "hochberg", "hommel", "bonferroni")) UseMethod("covarTest_dis")
 
 #' @rdname covarTest_dis
 #' @export
-covarTest_dis.rdd_data <- function(object, bw = NULL, exact = FALSE, p.adjust = c("none", "holm", "BH", "BY", "hochberg", "hommel", 
-    "bonferroni")) {
+covarTest_dis.rdd_data <- function(object, bw = NULL, exact = FALSE,
+                                   p.adjust = c("none", "holm", "BH", "BY", "hochberg", "hommel", "bonferroni")) {
     
     cutpoint <- getCutpoint(object)
     covar <- getCovar(object)
     cutvar <- object$x
     
-    covarTest_dis_low(covar = covar, cutvar = cutvar, cutpoint = cutpoint, bw = bw, exact = exact, p.adjust = p.adjust)
+    covarTest_dis_low(covar = covar, cutvar = cutvar, cutpoint = cutpoint, bw = bw,
+                      exact = exact, p.adjust = p.adjust)
     
 }
 
 #' @rdname covarTest_dis
 #' @export
-covarTest_dis.rdd_reg <- function(object, bw = NULL, exact = FALSE, p.adjust = c("none", "holm", "BH", "BY", "hochberg", "hommel", 
-    "bonferroni")) {
+covarTest_dis.rdd_reg <- function(object, bw = NULL, exact = FALSE,
+                                  p.adjust = c("none", "holm", "BH", "BY", "hochberg", "hommel", "bonferroni")) {
     
     cutpoint <- getCutpoint(object)
     dat <- object$RDDslot$rdd_data
@@ -167,12 +169,13 @@ covarTest_dis.rdd_reg <- function(object, bw = NULL, exact = FALSE, p.adjust = c
     if (is.null(bw)) 
         bw <- getBW(object)
     
-    covarTest_dis_low(covar = covar, cutvar = cutvar, cutpoint = cutpoint, bw = bw, exact = exact, p.adjust = p.adjust)
+    covarTest_dis_low(covar = covar, cutvar = cutvar, cutpoint = cutpoint, bw = bw,
+                      exact = exact, p.adjust = p.adjust)
     
 }
 
-covarTest_dis_low <- function(covar, cutvar, cutpoint, bw = NULL, exact = NULL, p.adjust = c("none", "holm", "BH", "BY", "hochberg", 
-    "hommel", "bonferroni")) {
+covarTest_dis_low <- function(covar, cutvar, cutpoint, bw = NULL, exact = NULL, 
+                              p.adjust = c("none", "holm", "BH", "BY", "hochberg", "hommel", "bonferroni")) {
     
     p.adjust <- match.arg(p.adjust)
     
@@ -187,7 +190,7 @@ covarTest_dis_low <- function(covar, cutvar, cutpoint, bw = NULL, exact = NULL, 
     
     
     ## Split data
-    covar_num <- sapply(covar, as.numeric)
+    covar_num <- sapply(covar, make_numeric)
     
     tests <- apply(covar_num, 2, function(x) ks.test(x[regime], x[!regime], exact = exact))
     tests_vals <- sapply(tests, function(x) x[c("statistic", "p.value")])
@@ -202,3 +205,9 @@ covarTest_dis_low <- function(covar, cutvar, cutpoint, bw = NULL, exact = NULL, 
     
     
 } 
+
+## small utility function
+make_numeric <- function(x){
+    if(is.character(x)) x <- as.factor(x)
+    as.numeric(x)
+}

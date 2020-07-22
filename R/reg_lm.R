@@ -137,8 +137,15 @@ print.rdd_reg_lm <- function(x, ...) {
 
 
 #' @export
-plot.rdd_reg_lm <- function(x, ...) {
+plot.rdd_reg_lm <- function(x, binwidth=NULL, ...) {
     
+  ## set default binwitdh
+  if(is.null(binwidth)) {
+    bw_plot <- rdd_bw_cct_plot(x)
+    # binwidth <- bw_plot$results["Bin Length",, drop=TRUE] old version
+    binwidth <- bw_plot$h[1]
+  }
+  
     ## data
     dat <- getOriginalData(x)
     subw <- if (!is.null(x$weights)) 
@@ -146,6 +153,6 @@ plot.rdd_reg_lm <- function(x, ...) {
     pred <- data.frame(x = dat$x, y = fitted(x))[subw, ]
     
     ## plot
-    plotBin(dat$x, dat$y, ...)
+    plotBin(dat$x, dat$y, h=binwidth, cutpoint=getCutpoint(x), ...)
     lines(pred[order(pred$x), ])
 } 

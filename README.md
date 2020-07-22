@@ -1,9 +1,15 @@
 rddtools
-========================================================
-[![Travis-CI Build Status](https://travis-ci.org/bquast/rddtools.png?branch=master)](https://travis-ci.org/bquast/rddtools)
-[![Coverage Status](https://coveralls.io/repos/bquast/rddtools/badge.svg)](https://coveralls.io/r/bquast/rddtools)
+========
 
-**rddtools** is a new R package under development, designed to offer a set of tools to run all the steps required for a Regression Discontinuity Design (RDD) Analysis, from primary data visualisation to discontinuity estimation, sensitivity and placebo testing. 
+
+[![License](https://img.shields.io/badge/license-GPLv3-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/gpl-3.0.html)
+[![CRAN Version](https://www.r-pkg.org/badges/version/rddtools)](https://cran.r-project.org/package=rddtools)
+[![R build status](https://github.com/bquast/rddtools/workflows/R-CMD-check/badge.svg)](https://github.com/bquast/rddtools/actions?workflow=R-CMD-check)
+[![Coverage Status](https://img.shields.io/codecov/c/github/bquast/rddtools/master.svg)](https://codecov.io/bquast/rddtools/rddtools?branch=master)
+[![Total RStudio Cloud Downloads](https://cranlogs.r-pkg.org/badges/grand-total/rddtools?color=brightgreen)](https://cran.r-project.org/package=rddtools)
+[![RStudio Cloud Downloads](https://cranlogs.r-pkg.org/badges/rddtools?color=brightgreen)](https://cran.r-project.org/package=rddtools)
+
+**rddtools** is an R package designed to offer a set of tools to run all the steps required for a Regression Discontinuity Design (RDD) Analysis, from primary data visualisation to discontinuity estimation, sensitivity and placebo testing. 
 
 
 Installing **rddtools**
@@ -12,11 +18,11 @@ Installing **rddtools**
 This github website hosts the source code. One of the easiest ways to install the package from github is by using the R package **devtools**:
 
 ```r
-if (!require('devtools')) install.packages('devtools')
-devtools::install_github( "bquast/rddtools" )
+if (!require('remotes')) install.packages('remotes')
+remotes::install_github( "bquast/rddtools" )
 ```
 
-Note however the latest version of rddtools only works with R 3.0, and that you might need to install  [Rtools](http://stat.ethz.ch/CRAN/bin/windows/Rtools/) if on Windows. 
+Note however the latest version of rddtools only works with R 3.0, and that you might need to install  [Rtools](https://cran.r-project.org/bin/windows/Rtools/) if on Windows. 
 
 
 Documentation
@@ -24,7 +30,7 @@ Documentation
 The (preliminary) documentation is available in the help files directly, as well as in the *vignettes*. The vignettes can be accessed from R.
 
 ```r
-vignette("rddtools")
+vignette('rddtools')
 ```
 
 rddtools: main features
@@ -55,12 +61,12 @@ rddtools: main features
 
 References
 -----------------------
-  [Imbens and Kalyanaraman 2012]: http://ideas.repec.org/a/oup/restud/v79y2012i3p933-959.html "Imbens, G. & Kalyanaraman, K. (2012) Optimal Bandwidth Choice for the Regression Discontinuity Estimator, Review of Economic Studies, 79, 933-959"
+  [Imbens and Kalyanaraman 2012]: https://ideas.repec.org/a/oup/restud/v79y2012i3p933-959.html "Imbens, G. & Kalyanaraman, K. (2012) Optimal Bandwidth Choice for the Regression Discontinuity Estimator, Review of Economic Studies, 79, 933-959"
   
-  [Lee 2008]: http://ideas.repec.org/a/eee/econom/v142y2008i2p675-697.html "Lee, D. S. (2008) Randomized experiments from non-random selection in U.S. House elections, Journal of Econometrics, 142, 675-697"
+  [Lee 2008]: https://ideas.repec.org/a/eee/econom/v142y2008i2p675-697.html "Lee, D. S. (2008) Randomized experiments from non-random selection in U.S. House elections, Journal of Econometrics, 142, 675-697"
   
-  [Imbens and Lemieux 2008]: http://ideas.repec.org/a/eee/econom/v142y2008i2p615-635.html "Imbens, G. & Lemieux, T. (2008) Regression discontinuity designs: A guide to practice, Journal of Econometrics, Vol. 142(2), pages 615-635"
+  [Imbens and Lemieux 2008]: https://ideas.repec.org/a/eee/econom/v142y2008i2p615-635.html "Imbens, G. & Lemieux, T. (2008) Regression discontinuity designs: A guide to practice, Journal of Econometrics, Vol. 142(2), pages 615-635"
   
-  [Cameron et al. 2008]: http://ideas.repec.org/a/tpr/restat/v90y2008i3p414-427.html "Cameron, Gelbach and Miller (2008) Bootstrap-Based Improvements for Inference with Clustered Errors, The Review of Economics and Statistics, Vol. 90(3), pages 414-427"
+  [Cameron et al. 2008]: https://ideas.repec.org/a/tpr/restat/v90y2008i3p414-427.html "Cameron, Gelbach and Miller (2008) Bootstrap-Based Improvements for Inference with Clustered Errors, The Review of Economics and Statistics, Vol. 90(3), pages 414-427"
   
-  [Ruppert et al 1995]: http://www.jstor.org/stable/2291516 "Ruppert, D., Sheather, S. J. and Wand, M. P. (1995). An effective bandwidth selector for local least squares regression. Journal of the American Statistical Association, 90, 1257–1270."
+  [Ruppert et al 1995]: https://www.jstor.org/stable/2291516 "Ruppert, D., Sheather, S. J. and Wand, M. P. (1995). An effective bandwidth selector for local least squares regression. Journal of the American Statistical Association, 90, 1257–1270."
