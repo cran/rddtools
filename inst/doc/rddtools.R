@@ -22,7 +22,6 @@ plot(reg_para)
 bw_ik <- rdd_bw_ik(house_rdd)
 reg_nonpara <- rdd_reg_np(rdd_object=house_rdd, bw=bw_ik)
 print(reg_nonpara)
-plot(x=reg_nonpara)
 
 ## ----SensiPlot----------------------------------------------------------------
 plotSensi(reg_nonpara, from=0.05, to=1, by=0.1)
