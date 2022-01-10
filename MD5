@@ -1,6 +1,6 @@
-6c1956853766509f19dca2e9904b6a55 *DESCRIPTION
+2742f1f21a372064619109b08a2d981c *DESCRIPTION
 b9f958b0822754dffe47f6cd2cc6101e *NAMESPACE
-cd1f84685f8f46f7976bd585843a1ca0 *NEWS.md
+5ec0bec94df898d3ffe1429a4a244abd *NEWS.md
 c08574313957522248edf3ebfc809345 *R/as.npreg.R
 8d407d54f90f432c8fc0cbbf2434bd53 *R/bw_cct_estim.R
 aa4abcbf309513d5e3a61e33a88b3902 *R/bw_cct_plot.R
@@ -25,10 +25,10 @@ fbf11245edca61b32bc756fca35b08a4 *R/rdd_data_methods.R
 c34a6468792040b37d859d362e321576 *R/reg_lm.R
 5206ff60d64dd594ccecd731bfdeddf2 *R/reg_np.R
 92b4a506a7e13905b3aa3f2aefaf297e *R/var_estim.R
-d6282ad3d11d182a0f37da958cd17a81 *R/various_code.R
+aaf24a8af206b04133c6d386c005284f *R/various_code.R
 b89464ffcd93ab510dea240617c7a971 *R/waldci.R
 e0d741f7aa991785dc165f8e2d1e5c7b *README.md
-7e896b4fc07caa1ced65c82524d9fbfc *build/vignette.rds
+8f21b7371e3dd3110f471e042f6b5560 *build/vignette.rds
 952eb3c78dcd12148dc495f650aab842 *data/STAR_MHE.rda
 fc042ed9319b90bff592d7cec387959a *data/house.rda
 6cd78b7b2e3db7b557b2d7c8a1fc52ea *data/indh.rda
@@ -37,10 +37,10 @@ c0ee85a59b3798c4b1e1c1afa6983e20 *inst/CITATION
 ebc7e8311fda6646f5858a807a08ab52 *inst/devtools_internal_tests.R
 717696d88e9b9cfc9a3e5d2521e1d24b *inst/doc/morocco.R
 dc67db6d4f5da03df418690a17599ea9 *inst/doc/morocco.Rmd
-5f1173c73dd817db57e34965cfb38585 *inst/doc/morocco.html
+3dbac558af82ee51f4c1696e02ee463e *inst/doc/morocco.html
 33ccb671ed5665b100797087a435b84c *inst/doc/rddtools.R
 b30f318c77ef47ead3888440c3fc22cf *inst/doc/rddtools.Rmd
-8fba5ab6662b1f9d1546233f147cc686 *inst/doc/rddtools.html
+059f750daa4f25c21e0277ab95f84f78 *inst/doc/rddtools.html
 2e8c819dd10adad6edf5c3ca3de26621 *man/STAR_MHE.Rd
 1a70ef0879ed1906faa9a1109d568b84 *man/as.lm.Rd
 6bc9e5aceec1e544098182eb28517973 *man/as.npregbw.Rd
