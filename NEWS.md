@@ -1,3 +1,19 @@
+rddtools 2.0.1
+=====================
+* Fix minor R CRAN issues
+* Update documentation
+* Chainge maintainer to Matthieu
+
+rddtools 1.8.0
+=====================
+* redo documentation
+
+
+rddtools 1.6.1
+=====================
+* Fix bug #12 (https://github.com/bquast/rddtools/issues/12) reported by @PhilipSpechler 
+
+
 rddtools 1.6.0
 =====================
 * documentation update

@@ -1,8 +1,7 @@
-#' @name rddtools
-#' @docType package
 #' @title Regression Discontinuity Design 
 #' @import np ggplot2 KernSmooth rdrobust
 #' @description Set of functions for Regression Discontinuity Design ('RDD'), for data visualisation, estimation and testing.
+"_PACKAGE"
 
 utils::globalVariables(c("x", "y", "position", "cutpoint", "LATE", "CI_low", "CI_high", "sd", "quantile", "ks.test", "t.test", "coef", "density"))
 utils::globalVariables(c("abline", "as.formula", "coef density", "df.residual", "fitted", "glm", "hist", "ksmooth",
@@ -14,7 +13,6 @@ utils::globalVariables(c("abline", "as.formula", "coef density", "df.residual", 
 #' @title INDH data set
 #' @description Data from the Initiative Nationale du Development Humaine, collected as the part of the SNSF project "Development Aid and Social Dynamics"
 #' @format A data frame with two variables with 720 observations each
-#' @source Development Aid and social Dyanmics website: \url{https://qua.st/Development-Aid-Social-Dynamics/}
 #' @references Arcand, Rieger, and Nguyen (2015) 'Development Aid and Social Dyanmics Data Set'
 #' @examples 
 #' # load the data
@@ -68,14 +66,12 @@ NULL
 #' }
 #' @details ). This is a transformation of the dataset from the project STAR (Student/Teacher Achievement Ratio. 
 #' The full dataset is described and available in package AER, \code{\link[AER]{STAR}}. 
-#' The transformed data was obtained using the STATA script krueger.do, obtained from Joshua Angrist website 
-#' (\url{https://economics.mit.edu/faculty/angrist/data1/mhe/krueger}), on the webstar.dta.
+#' The transformed data was obtained using the STATA script krueger.do, obtained from Joshua Angrist website, on the webstar.dta.
 #' @references Krueger, A. (1999) 'Experimental Estimates Of Education Production Functions,' 
 #' \emph{The Quarterly Journal of Economics}, Vol. 114(2), pages 497-532, May.
 #' @references Angrist, A. ad  Pischke J-S (2008) \emph{Mostly Harmless Econometrics: An Empiricist's Companion}, 
 #' Princeton University press
 #' @source Data obtained using the script krueger.do on data webstar.rda, found on J. Angrist website 
-#' \url{https://economics.mit.edu/faculty/angrist/data1/mhe/krueger}, retrieved on 26 November 2012.
 #' @examples 
 #' data(STAR_MHE)
 #' 
